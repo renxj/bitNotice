@@ -1,15 +1,14 @@
 <!--index.wxml-->
 <view class="container">
+  <view class="title">
+    标题
+  </view>
+  <image src='https://static.suiyueyule.com/20180201183328-Fkd-jxxJvteU0aL-E5LNjYfoRObj.jpg-banner' background-size='cover'></image>
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.province}}</text>
-      <text class="userinfo-nickname">{{userInfo.city}}</text>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
   </view>
 </view>
