@@ -1,14 +1,15 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/remind/remind"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#000",
+    "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTitleText": "bitNotice",
-    "navigationBarTextStyle":"white",
-    "backgroundColor": "#eeeeee"
+    "navigationBarTextStyle":"black",
+    "backgroundTextStyle": "white",
+    "backgroundColor": "#f8f8f8"
   },
   "networkTimeout": {
     "request": 10000,

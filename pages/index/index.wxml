@@ -1,36 +1,20 @@
 <!--index.wxml-->
 <view class="container">
-  <!-- <view>
-     <text class='title'>全部</text> 
-    <block wx:for="{{listData}}" wx:for-item="item" wx:key="index">
-      <text class="list-item">{{index + 1}}. {{item}}</text>
+  <view class="weui-cells__title">币种</view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{listData}}" wx:for-item="item" wx:key="index">   
+      <navigator url="../remind/remind" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">{{item}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
     </block>
-  </view> -->
-  
-  <view class="item-box">
-    <view class="items">
-      <view class="item title">
-          <text>币种</text>
-      </view>
-      <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-        <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE"    data-index="{{index}}" style="{{item.txtStyle}}" class="inner txt">
-          <image class="item-icon" mode="widthFix" src="{{item.icon}}">
-          </image>
-          <text>{{item.txt}}</text>
-        </view>
-        <view data-index="{{index}}" bindtap= "delItem" class="inner del">
-          删除
-        </view>
-      </view>
-    </view>
-  </view>
-
+  </view> 
   <!-- <image src='https://static.suiyueyule.com/20180201183328-Fkd-jxxJvteU0aL-E5LNjYfoRObj.jpg-banner' background-size='cover'></image> -->
-  <!-- <view class="userinfo">
+   <!-- <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-  </view> -->
+  </view>  -->
 </view>

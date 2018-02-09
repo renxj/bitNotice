@@ -1,0 +1,9 @@
+@import "../../app.wxss";
+.log-list {
+  display: flex;
+  flex-direction: column;
+}
+.button-sp-area {
+  width: 60%;
+  margin: 150rpx auto;
+}

@@ -8,8 +8,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    listData: ['BTC', 'BCH','ETH','ETC'],
-    delBtnWidth: 180//删除按钮宽度单位（rpx）
+    listData: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,7 +17,6 @@ Page({
     })
   },
   onLoad: function () {
-    this.initEleWidth();
     this.tempData();
     if (app.globalData.userInfo) {
       this.setData({
@@ -62,125 +60,264 @@ Page({
       path: 'pages/index/index'
     }
   },
-  touchS: function (e) {
-    if (e.touches.length == 1) {
-      this.setData({
-        //设置触摸起始点水平方向位置
-        startX: e.touches[0].clientX
-      });
-    }
-  },
-  touchM: function (e) {
-    if (e.touches.length == 1) {
-      //手指移动时水平方向位置
-      var moveX = e.touches[0].clientX;
-      //手指起始点位置与移动期间的差值
-      var disX = this.data.startX - moveX;
-      var delBtnWidth = this.data.delBtnWidth;
-      var txtStyle = "";
-      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，文本层位置不变
-        txtStyle = "left:0px";
-      } else if(disX > 0){//移动距离大于0，文本层left值等于手指移动距离
-        txtStyle = "left:-" + disX + "px";
-        if (disX >= delBtnWidth) {
-          //控制手指移动距离最大值为删除按钮的宽度
-          txtStyle = "left:-" + delBtnWidth + "px";
-        }
-      }
-      //获取手指触摸的是哪一项
-      var index = e.target.dataset.index;
-      var list = this.data.list;
-      console.log(list[index].txtStyle)
-      list[index].txtStyle = txtStyle;
-      //更新列表的状态
-      this.setData({
-        list: list
-      });
-    }
-  },
-  touchE: function (e) {
-    if (e.changedTouches.length == 1) {
-      //手指移动结束后水平位置
-      var endX = e.changedTouches[0].clientX;
-      //触摸开始与结束，手指移动的距离
-      var disX = this.data.startX - endX;
-      var delBtnWidth = this.data.delBtnWidth;
-      //如果距离小于删除按钮的1/2，不显示删除按钮
-      var txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px" : "left:0px";
-      //获取手指触摸的是哪一项
-      var index = e.target.dataset.index;
-      var list = this.data.list;
-      list[index].txtStyle = txtStyle;
-      //更新列表的状态
-      this.setData({
-        list: list
-      });
-    }
-  },
-  //获取元素自适应后的实际宽度
-  getEleWidth: function (w) {
-    var real = 0;
-    try {
-      var res = wx.getSystemInfoSync().windowWidth;
-      var scale = (750 / 2) / (w / 2);//以宽度750px设计稿做宽度的自适应
-      // console.log(scale);
-      real = Math.floor(res / scale);
-      return real;
-    } catch (e) {
-      return false;
-      // Do something when catch error
-    }
-  },
-  initEleWidth: function () {
-    var delBtnWidth = this.getEleWidth(this.data.delBtnWidth);
-    this.setData({
-      delBtnWidth: delBtnWidth
-    });
-  },
-  //点击删除按钮事件
-  delItem: function (e) {
-    //获取列表中要删除项的下标
-    var index = e.target.dataset.index;
-    var list = this.data.list;
-    //移除列表中下标为index的项
-    list.splice(index, 1);
-    //更新列表的状态
-    this.setData({
-      list: list
-    });
-  },
   //测试临时数据
   tempData: function () {
 
-    var list = [
-      {
-        txtStyle: "",
-        icon: "https://static.suiyueyule.com/specialtopic/colour.png",
-        txt: "BTC"
-      },
-      {
-        txtStyle: "",
-        icon: "https://static.suiyueyule.com/specialtopic/colour.png",
-        txt: "BCH"
-      },
-      {
-        txtStyle: "",
-        icon: "https://static.suiyueyule.com/specialtopic/colour.png",
-        txt: "ETH"
-      },
-      {
-        txtStyle: "",
-        icon: "https://static.suiyueyule.com/specialtopic/colour.png",
-        txt: "ETC"
-      },
-      {
-        txtStyle: "",
-        icon: "https://static.suiyueyule.com/specialtopic/colour.png",
-        txt: "RMB"
-      },
-    ];
+    var list = {
+      "code": 0,
+      "message": "成功",
+      "data": [
+        "qbt_usdt",
+        "gnx_usdt",
+        "qlc_usdt",
+        "eth_btc",
+        "stx_usdt",
+        "etc_eth",
+        "ocn_eth",
+        "salt_eth",
+        "ost_usdt",
+        "god_usdt",
+        "zrx_eth",
+        "hsr_eth",
+        "storj_usdt",
+        "bot_qtum",
+        "tsl_qtum",
+        "ltc_usdt",
+        "gnt_eth",
+        "powr_usdt",
+        "zpt_usdt",
+        "tnc_eth",
+        "dpy_eth",
+        "rcn_usdt",
+        "btm_btc",
+        "mds_usdt",
+        "rdn_eth",
+        "icx_usdt",
+        "llt_eth",
+        "drgn_eth",
+        "ink_usdt",
+        "trx_eth",
+        "waves_btc",
+        "btf_btc",
+        "lsk_btc",
+        "omg_usdt",
+        "btc_usdt",
+        "zrx_usdt",
+        "dgd_usdt",
+        "nas_btc",
+        "ven_eth",
+        "sbtc_btc",
+        "ink_btc",
+        "bot_usdt",
+        "doge_usdt",
+        "mco_usdt",
+        "tnc_usdt",
+        "waves_usdt",
+        "ada_btc",
+        "bat_eth",
+        "qsp_eth",
+        "storj_btc",
+        "icx_eth",
+        "snt_eth",
+        "cofi_eth",
+        "salt_usdt",
+        "bifi_usdt",
+        "bnty_usdt",
+        "dbc_usdt",
+        "zec_usdt",
+        "zil_eth",
+        "powr_btc",
+        "fun_usdt",
+        "eos_usdt",
+        "mkr_eth",
+        "dbc_btc",
+        "iota_btc",
+        "bch_usdt",
+        "qtum_btc",
+        "btg_btc",
+        "bcd_btc",
+        "pay_eth",
+        "theta_usdt",
+        "bch_btc",
+        "neo_btc",
+        "cvc_usdt",
+        "med_eth",
+        "kick_eth",
+        "pst_eth",
+        "qlc_btc",
+        "qash_btc",
+        "qbt_eth",
+        "btf_usdt",
+        "zpt_eth",
+        "lrc_eth",
+        "theta_eth",
+        "nas_usdt",
+        "mdt_usdt",
+        "gtc_eth",
+        "hsr_usdt",
+        "smt_eth",
+        "rdn_usdt",
+        "ruff_eth",
+        "snt_usdt",
+        "mco_eth",
+        "cofi_usdt",
+        "ddd_usdt",
+        "jnt_btc",
+        "zrx_btc",
+        "eos_btc",
+        "qsp_usdt",
+        "smt_usdt",
+        "hsr_btc",
+        "oax_eth",
+        "btg_usdt",
+        "btm_usdt",
+        "bnt_eth",
+        "mda_usdt",
+        "link_eth",
+        "zil_usdt",
+        "bto_eth",
+        "doge_btc",
+        "mana_eth",
+        "lrc_usdt",
+        "lun_usdt",
+        "omg_btc",
+        "bts_usdt",
+        "fuel_eth",
+        "ink_qtum",
+        "wings_eth",
+        "ddd_eth",
+        "kick_usdt",
+        "ruff_btc",
+        "rcn_eth",
+        "pst_usdt",
+        "qlc_eth",
+        "nas_eth",
+        "omg_eth",
+        "jnt_eth",
+        "elf_eth",
+        "ctr_eth",
+        "gxs_usdt",
+        "blz_eth",
+        "xmr_usdt",
+        "mtn_usdt",
+        "bat_btc",
+        "data_eth",
+        "mdt_eth",
+        "cvc_eth",
+        "powr_eth",
+        "pay_btc",
+        "bto_usdt",
+        "xrp_usdt",
+        "mtn_eth",
+        "dbc_eth",
+        "ddd_btc",
+        "dnt_eth",
+        "llt_snet",
+        "elf_usdt",
+        "lsk_usdt",
+        "bot_eth",
+        "snt_btc",
+        "snet_usdt",
+        "req_eth",
+        "knc_usdt",
+        "etc_btc",
+        "gas_btc",
+        "fun_eth",
+        "lend_usdt",
+        "med_qtum",
+        "arn_eth",
+        "pay_usdt",
+        "ost_eth",
+        "bat_usdt",
+        "jnt_usdt",
+        "dai_usdt",
+        "ocn_btc",
+        "fuel_usdt",
+        "dash_usdt",
+        "cdt_usdt",
+        "lun_eth",
+        "ltc_btc",
+        "ocn_usdt",
+        "tio_usdt",
+        "ctr_usdt",
+        "mkr_usdt",
+        "xmr_btc",
+        "drgn_usdt",
+        "dash_btc",
+        "data_usdt",
+        "bifi_btc",
+        "bcd_usdt",
+        "gtc_usdt",
+        "qash_eth",
+        "lend_eth",
+        "xrp_btc",
+        "tnt_eth",
+        "eth_usdt",
+        "neo_usdt",
+        "ven_usdt",
+        "med_usdt",
+        "qash_usdt",
+        "ada_usdt",
+        "qtum_usdt",
+        "llt_usdt",
+        "gtc_btc",
+        "zec_btc",
+        "tnc_btc",
+        "zsc_usdt",
+        "eos_eth",
+        "iota_usdt",
+        "gnt_usdt",
+        "mda_eth",
+        "cdt_eth",
+        "zsc_eth",
+        "rlc_eth",
+        "bcx_btc",
+        "ruff_usdt",
+        "knc_eth",
+        "stx_eth",
+        "god_btc",
+        "mds_eth",
+        "ae_eth",
+        "tio_eth",
+        "bcdn_usdt",
+        "rep_eth",
+        "bnty_eth",
+        "fil_usdt",
+        "tnt_usdt",
+        "req_usdt",
+        "xtz_usdt",
+        "gas_usdt",
+        "tsl_usdt",
+        "gnx_eth",
+        "trx_usdt",
+        "snet_eth",
+        "dpy_usdt",
+        "gxs_btc",
+        "qbt_qtum",
+        "qtum_eth",
+        "storj_eth",
+        "bcx_usdt",
+        "bts_btc",
+        "lrc_btc",
+        "blz_usdt",
+        "sbtc_usdt",
+        "ae_usdt",
+        "etc_usdt",
+        "ink_eth",
+        "mdt_btc",
+        "btm_eth",
+        "zpt_btc",
+        "dgd_eth",
+        "link_usdt",
+        "mana_usdt",
+        "bcdn_eth"
+      ]
+    };
+      
     this.setData({
-      list: list
+      listData: (list.data || []).map(item => {
+        return item.replace(/_/, '/').toUpperCase()
+      })
     });
 
   }

@@ -1,8 +1,9 @@
+@import "../../app.wxss";
 /**index.wxss**/
 .container{
-  background: #000;
+  background: #f8f8f8;
   height: 100%;
-  color: #fff;
+  color: #333;
 }
 
 .title {
@@ -11,6 +12,8 @@
   text-align: left;
   padding-left: 40rpx;
   margin-bottom: 20rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
 }
 
 .list-item{
@@ -19,6 +22,8 @@
   height: 80rpx;
   line-height: 80rpx;
   padding-left: 40rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
 }
 
 .userinfo {
@@ -46,54 +51,9 @@ view{
   box-sizing: border-box;
 }
 
-.item-box{
-  width: 700rpx;
-  margin: 0 auto;
-  padding:40rpx 0;
-}
-.items{
-    width: 100%;
-    background-color:#fff;
-    color: #333;
-}
-.item{
-  position: relative;
-  border-top: 2rpx solid#eee;
-  height: 120rpx;
-  line-height: 120rpx;
-  overflow: hidden;
-}
-.item.title{
-  padding-left: 20rpx;
-}
-.item:last-child{
-  border-bottom: 2rpx solid#eee;
-}
-.inner{
-  position: absolute;
-  top:0;
-}
-.inner.txt{
-  background-color: #fff;
-  width: 100%;
-  z-index: 5;
-  padding:0 10rpx;
-  transition: left 0.2s ease-in-out;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  color: #333;
-}
-.inner.del{
-  background-color: #e64340;
-  width: 180rpx;
-  text-align: center;
-  z-index: 4;
-  right: 0;
-  color: #fff
-}
 .item-icon{
-  width: 64rpx;
+  width: 20rpx;
+  height: 20rpx;
   vertical-align: middle;
-  margin-right: 16rpx
+  margin-right: 16rpx;
 }
