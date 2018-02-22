@@ -5,11 +5,12 @@ Page({
   data: {
     logs: []
   },
-  onLoad: function () {
-    this.setData({
-      logs: (wx.getStorageSync('logs') || []).map(log => {
-        return util.formatTime(new Date(log))
-      })
+  onLoad: function (options) { 
+    let param = options.symbol.replace('/', '_').toLowerCase()
+    console.log(param) 
+    let title = options.symbol + '详情'
+    wx.setNavigationBarTitle({
+      title: title
     })
   }
 })
