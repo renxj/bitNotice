@@ -15,3 +15,12 @@
   width: 208rpx;
   height: 140rpx;
 }
+.del{
+  margin-left: 20rpx;
+  color: green;
+  font-size: 28rpx;
+}
+.edit{
+  color: green;
+  font-size: 28rpx;
+}

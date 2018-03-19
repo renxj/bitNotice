@@ -3,14 +3,23 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    logs: []
+    logs: [],
+    aryGoods: []
   },
-  onLoad: function (options) { 
-    let param = options.symbol.replace('/', '_').toLowerCase()
-    console.log(param) 
-    let title = options.symbol + '详情'
+  onLoad: function (options) {  
     wx.setNavigationBarTitle({
-      title: title
+      title: '提醒设置'
+    })
+  },
+  //点击加号,跳转到搜索
+  onAddBtnTap: function (e) {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
+  },
+  bindViewTap: function() {
+    wx.switchTab({
+      url: '../mytips/mytips'
     })
   }
 })

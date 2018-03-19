@@ -1,11 +1,8 @@
 <!--logs.wxml-->
 <view class="container log-list">
-  <view class="weui-cells__title">设置到价提醒</view>
-  <view class="weui-cells weui-cells_after-title">
-      <!-- <view class="weui-cell">
-          <view class="weui-cell__bd"></view>
-      </view> -->
-      <view class="weui-cell weui-cell_input">
+   <view class="weui-cells__title">设置到价提醒</view>
+  <view class="weui-cells weui-cells_after-title"> 
+      <!-- <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
               <view class="weui-label">价格</view>
           </view>
@@ -15,7 +12,7 @@
           <view class="weui-cell__ft">
               <switch  />
           </view>
-      </view>
+      </view> -->
       <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
               <view class="weui-label">价格涨到</view>
@@ -50,6 +47,6 @@
   </view>
 
   <view class="button-sp-area">
-      <button class="weui-btn" type="primary" plain="true">保存</button>
-  </view>
+      <button bindtap="bindViewTap" class="weui-btn" type="primary" plain="true">保存</button>
+  </view> 
 </view>

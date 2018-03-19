@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/remind/remind"
+    "pages/remind/remind",
+    "pages/mytips/mytips"
   ],
   "window":{
     "navigationBarBackgroundColor": "#f8f8f8",
@@ -10,6 +11,24 @@
     "navigationBarTextStyle":"black",
     "backgroundTextStyle": "white",
     "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "selectedColor": "#09bb07",
+    "color": "#353535",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "看币",
+        "iconPath": "images/tab_kanpan_nor.png",
+        "selectedIconPath": "images/tab_kanpan_sel.png"
+      },
+      {
+        "pagePath": "pages/mytips/mytips",
+        "text": "我的提醒",
+        "iconPath": "images/tab_optional_nor.png",
+        "selectedIconPath": "images/tab_optional_sel.png"
+      }
+    ]
   },
   "networkTimeout": {
     "request": 10000,
