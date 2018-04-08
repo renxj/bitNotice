@@ -4,7 +4,8 @@ const util = require('../../utils/util.js')
 Page({
   data: {
     logs: [],
-    aryGoods: []
+    aryGoods: [],
+    openid: '',
   },
   onLoad: function (options) {
     this.tempData() 
@@ -41,7 +42,27 @@ Page({
   },
   //测试临时数据
   tempData: function () {
-
+    let self = this;
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        console.log(res.data)
+        wx.request({
+          url: 'https://api.flkem.com/list',
+          data: {
+            openid: res.data
+          },
+          success: function (result) {
+            self.setData({
+              aryGoods: (result.data.data || []).map(item => {
+                return item.replace(/_/, '/').toUpperCase()
+              })
+            });
+          }
+        })
+      }
+    })
+    
     var list = {
       "code": 0,
       "message": "成功",
@@ -53,11 +74,7 @@ Page({
       ]
     };
 
-    this.setData({
-      aryGoods: (list.data || []).map(item => {
-        return item.replace(/_/, '/').toUpperCase()
-      })
-    });
+    
 
   }
 

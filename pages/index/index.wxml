@@ -1,12 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-  <!-- <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>  -->
   <view class="weui-cells__title">币种</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{listData}}" wx:for-item="item" wx:key="index">   
@@ -16,5 +9,9 @@
       </navigator>
     </block>
   </view> 
-     
+  <!--搜索按钮-->
+  <view class="icon_search" bindtap="onStockSearchEvent">
+      <icon type="search" size="20"/>
+      <text style="color: #dddddd; font-size: 26rpx;">搜索</text>
+  </view>
 </view>

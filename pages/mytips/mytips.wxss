@@ -16,11 +16,11 @@
   height: 140rpx;
 }
 .del{
-  margin-left: 20rpx;
-  color: green;
-  font-size: 28rpx;
+  margin-left: 40rpx;
+  color: #1aad19;
+  font-size: 30rpx;
 }
 .edit{
-  color: green;
-  font-size: 28rpx;
+  color: #1aad19;
+  font-size: 30rpx;
 }

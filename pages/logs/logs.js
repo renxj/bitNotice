@@ -3,15 +3,18 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    logs: []
+    logs: [],
+    symbol: '',
   },
   onLoad: function (options) {
     this.line('stage', {
       xAxis: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
       yAxis: [11, 33, 22, 32, 14, 15, 20, 60, 23, 44, 77, 122, 133, 89, 156, 122, 128, 143, 111, 101, 132, 99, 98, 44, 12, 14, 111, 13, 12, 55]
     })
-    console.log(options)
     let title = options.symbol + '详情'
+    this.setData({
+      symbol: options.symbol
+    })
     wx.setNavigationBarTitle({
       title: title
     })
@@ -45,8 +48,12 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
-    wx.redirectTo({
-      url: '../remind/remind'
+    let url = '../remind/remind?symbol=' + this.data.symbol
+    // wx.redirectTo({
+    //   url: url
+    // })
+    wx.navigateTo({
+      url
     })
   }
 })

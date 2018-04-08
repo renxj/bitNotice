@@ -1,52 +1,46 @@
 <!--logs.wxml-->
 <view class="container log-list">
    <view class="weui-cells__title">设置到价提醒</view>
-  <view class="weui-cells weui-cells_after-title"> 
-      <!-- <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-              <view class="weui-label">价格</view>
-          </view>
-          <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="0.0000"/>
-          </view>
-          <view class="weui-cell__ft">
-              <switch  />
-          </view>
-      </view> -->
-      <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-              <view class="weui-label">价格涨到</view>
-          </view>
-          <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="0.0000"/>
-          </view>
-          <view class="weui-cell__ft">
-              <switch  />
-          </view>
-      </view>
-      <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-              <view class="weui-label">价格跌到</view>
-          </view>
-          <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="0.0000"/>
-          </view>
-          <view class="weui-cell__ft">
-              <switch  />
-          </view>
-      </view>
-      <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">24小时涨幅</view>
-          <view class="weui-cell__bd">
-              <input class="weui-input" placeholder="0.0000"/>
-          </view>
-          <view class="weui-cell__ft">
-              <switch checked />
-          </view>
-      </view>
-  </view>
+   <form bindsubmit="formSubmit" report-submit="true">
 
-  <view class="button-sp-area">
-      <button bindtap="bindViewTap" class="weui-btn" type="primary" plain="true">保存</button>
-  </view> 
+    <view class="weui-cells weui-cells_after-title"> 
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">价格涨到</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="0.0000"/>
+            </view>
+            <view class="weui-cell__ft">
+                <switch name='small' />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">价格跌到</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input name='price' class="weui-input" placeholder="0.0000"/>
+            </view>
+            <view class="weui-cell__ft">
+                <switch  name='bigest' />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">24小时涨幅</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="0.0000"/>
+            </view>
+            <view class="weui-cell__ft">
+                <span class='tip'>%</span><switch name='zhang' />
+            </view>
+        </view>
+    </view>
+    <view class="button-sp-area">
+        <button formType="submit" class="weui-btn" type="primary" plain="true">保存</button>
+    </view> 
+  </form>
+
 </view>

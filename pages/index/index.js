@@ -10,47 +10,41 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     listData: []
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  //获取openID
+  getOpenId: function() {
+    wx.getStorage({
+      key: 'key',
+      success: function (res) {
+        if(!res.data){
+          wx.login({
+            success: function (res) {
+              if (res.code) {
+                //发起网络请求
+                wx.request({
+                  url: 'https://api.flkem.com/getOpenid',
+                  data: {
+                    code: res.code
+                  },
+                  success: function (result) {
+                    wx.setStorage({
+                      key: "openid",
+                      data: result.data.data.openid
+                    })
+                  }
+                })
+              } else {
+                console.log('登录失败！' + res.errMsg)
+              }
+            }
+          });
+        }
+      }
     })
+    
   },
   onLoad: function () {
     this.tempData();
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    this.getOpenId();
   },
   onShareAppMessage: function () {
     return {
@@ -60,266 +54,27 @@ Page({
       path: 'pages/index/index'
     }
   },
-  //测试临时数据
+  //列表数据
   tempData: function () {
+    let self = this
+    wx.request({
+      url: 'https://api.flkem.com/pairs', 
+      data: {},
+      success: function (res) {
+        self.setData({
+          listData: (res.data.data || []).map(item => {
+            return item.replace(/_/, '/').toUpperCase()
+          })
+        });
+      }
+    })
 
-    var list = {
-      "code": 0,
-      "message": "成功",
-      "data": [
-        "qbt_usdt",
-        "gnx_usdt",
-        "qlc_usdt",
-        "eth_btc",
-        "stx_usdt",
-        "etc_eth",
-        "ocn_eth",
-        "salt_eth",
-        "ost_usdt",
-        "god_usdt",
-        "zrx_eth",
-        "hsr_eth",
-        "storj_usdt",
-        "bot_qtum",
-        "tsl_qtum",
-        "ltc_usdt",
-        "gnt_eth",
-        "powr_usdt",
-        "zpt_usdt",
-        "tnc_eth",
-        "dpy_eth",
-        "rcn_usdt",
-        "btm_btc",
-        "mds_usdt",
-        "rdn_eth",
-        "icx_usdt",
-        "llt_eth",
-        "drgn_eth",
-        "ink_usdt",
-        "trx_eth",
-        "waves_btc",
-        "btf_btc",
-        "lsk_btc",
-        "omg_usdt",
-        "btc_usdt",
-        "zrx_usdt",
-        "dgd_usdt",
-        "nas_btc",
-        "ven_eth",
-        "sbtc_btc",
-        "ink_btc",
-        "bot_usdt",
-        "doge_usdt",
-        "mco_usdt",
-        "tnc_usdt",
-        "waves_usdt",
-        "ada_btc",
-        "bat_eth",
-        "qsp_eth",
-        "storj_btc",
-        "icx_eth",
-        "snt_eth",
-        "cofi_eth",
-        "salt_usdt",
-        "bifi_usdt",
-        "bnty_usdt",
-        "dbc_usdt",
-        "zec_usdt",
-        "zil_eth",
-        "powr_btc",
-        "fun_usdt",
-        "eos_usdt",
-        "mkr_eth",
-        "dbc_btc",
-        "iota_btc",
-        "bch_usdt",
-        "qtum_btc",
-        "btg_btc",
-        "bcd_btc",
-        "pay_eth",
-        "theta_usdt",
-        "bch_btc",
-        "neo_btc",
-        "cvc_usdt",
-        "med_eth",
-        "kick_eth",
-        "pst_eth",
-        "qlc_btc",
-        "qash_btc",
-        "qbt_eth",
-        "btf_usdt",
-        "zpt_eth",
-        "lrc_eth",
-        "theta_eth",
-        "nas_usdt",
-        "mdt_usdt",
-        "gtc_eth",
-        "hsr_usdt",
-        "smt_eth",
-        "rdn_usdt",
-        "ruff_eth",
-        "snt_usdt",
-        "mco_eth",
-        "cofi_usdt",
-        "ddd_usdt",
-        "jnt_btc",
-        "zrx_btc",
-        "eos_btc",
-        "qsp_usdt",
-        "smt_usdt",
-        "hsr_btc",
-        "oax_eth",
-        "btg_usdt",
-        "btm_usdt",
-        "bnt_eth",
-        "mda_usdt",
-        "link_eth",
-        "zil_usdt",
-        "bto_eth",
-        "doge_btc",
-        "mana_eth",
-        "lrc_usdt",
-        "lun_usdt",
-        "omg_btc",
-        "bts_usdt",
-        "fuel_eth",
-        "ink_qtum",
-        "wings_eth",
-        "ddd_eth",
-        "kick_usdt",
-        "ruff_btc",
-        "rcn_eth",
-        "pst_usdt",
-        "qlc_eth",
-        "nas_eth",
-        "omg_eth",
-        "jnt_eth",
-        "elf_eth",
-        "ctr_eth",
-        "gxs_usdt",
-        "blz_eth",
-        "xmr_usdt",
-        "mtn_usdt",
-        "bat_btc",
-        "data_eth",
-        "mdt_eth",
-        "cvc_eth",
-        "powr_eth",
-        "pay_btc",
-        "bto_usdt",
-        "xrp_usdt",
-        "mtn_eth",
-        "dbc_eth",
-        "ddd_btc",
-        "dnt_eth",
-        "llt_snet",
-        "elf_usdt",
-        "lsk_usdt",
-        "bot_eth",
-        "snt_btc",
-        "snet_usdt",
-        "req_eth",
-        "knc_usdt",
-        "etc_btc",
-        "gas_btc",
-        "fun_eth",
-        "lend_usdt",
-        "med_qtum",
-        "arn_eth",
-        "pay_usdt",
-        "ost_eth",
-        "bat_usdt",
-        "jnt_usdt",
-        "dai_usdt",
-        "ocn_btc",
-        "fuel_usdt",
-        "dash_usdt",
-        "cdt_usdt",
-        "lun_eth",
-        "ltc_btc",
-        "ocn_usdt",
-        "tio_usdt",
-        "ctr_usdt",
-        "mkr_usdt",
-        "xmr_btc",
-        "drgn_usdt",
-        "dash_btc",
-        "data_usdt",
-        "bifi_btc",
-        "bcd_usdt",
-        "gtc_usdt",
-        "qash_eth",
-        "lend_eth",
-        "xrp_btc",
-        "tnt_eth",
-        "eth_usdt",
-        "neo_usdt",
-        "ven_usdt",
-        "med_usdt",
-        "qash_usdt",
-        "ada_usdt",
-        "qtum_usdt",
-        "llt_usdt",
-        "gtc_btc",
-        "zec_btc",
-        "tnc_btc",
-        "zsc_usdt",
-        "eos_eth",
-        "iota_usdt",
-        "gnt_usdt",
-        "mda_eth",
-        "cdt_eth",
-        "zsc_eth",
-        "rlc_eth",
-        "bcx_btc",
-        "ruff_usdt",
-        "knc_eth",
-        "stx_eth",
-        "god_btc",
-        "mds_eth",
-        "ae_eth",
-        "tio_eth",
-        "bcdn_usdt",
-        "rep_eth",
-        "bnty_eth",
-        "fil_usdt",
-        "tnt_usdt",
-        "req_usdt",
-        "xtz_usdt",
-        "gas_usdt",
-        "tsl_usdt",
-        "gnx_eth",
-        "trx_usdt",
-        "snet_eth",
-        "dpy_usdt",
-        "gxs_btc",
-        "qbt_qtum",
-        "qtum_eth",
-        "storj_eth",
-        "bcx_usdt",
-        "bts_btc",
-        "lrc_btc",
-        "blz_usdt",
-        "sbtc_usdt",
-        "ae_usdt",
-        "etc_usdt",
-        "ink_eth",
-        "mdt_btc",
-        "btm_eth",
-        "zpt_btc",
-        "dgd_eth",
-        "link_usdt",
-        "mana_usdt",
-        "bcdn_eth"
-      ]
-    };
-      
-    this.setData({
-      listData: (list.data || []).map(item => {
-        return item.replace(/_/, '/').toUpperCase()
-      })
-    });
-
-  }
+  },
+  // 显示搜索
+  onStockSearchEvent: function (e) {
+    wx.navigateTo({
+      url: '../search/search'
+    })
+  },
 
 })

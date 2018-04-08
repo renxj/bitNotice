@@ -15,3 +15,6 @@
   width: 208rpx;
   height: 140rpx;
 }
+.tip{
+  margin-right: 20rpx;
+}
