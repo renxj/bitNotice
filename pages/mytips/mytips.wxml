@@ -4,10 +4,10 @@
   <view hidden='{{aryGoods.length == 0}}' class="weui-cells weui-cells_after-title">
     <block wx:for="{{aryGoods}}" wx:for-item="item" wx:key="index">  
        <view class="weui-cell"> 
-        <view class="weui-cell__bd">{{item}}</view>
+        <view class="weui-cell__bd">{{item.symbol}}</view>
         <view class="weui-cell__ft">
           <span bindtap="onEditTap" class='edit' url="../remind/remind?symbol={{item}}">编辑</span>
-          <span bindtap="onDelTap" class='del'>删除</span>
+          <span data-id="{{item.id}}" bindtap="onDelTap" class='del'>删除</span>
         </view>
        </view> 
     </block>

@@ -9,13 +9,13 @@
                 <view class="weui-label">价格涨到</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="0.0000"/>
+                <input name="price" class="weui-input" placeholder="0.0000"/>
             </view>
             <view class="weui-cell__ft">
-                <switch name='small' />
+                <switch name='priceType' />
             </view>
         </view>
-        <view class="weui-cell weui-cell_input">
+        <!-- <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
                 <view class="weui-label">价格跌到</view>
             </view>
@@ -25,16 +25,16 @@
             <view class="weui-cell__ft">
                 <switch  name='bigest' />
             </view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
                 <view class="weui-label">24小时涨幅</view>
             </view>
             <view class="weui-cell__bd">
-                <input class="weui-input" placeholder="0.0000"/>
+                <input name='range' class="weui-input" placeholder="0.0000"/>
             </view>
             <view class="weui-cell__ft">
-                <span class='tip'>%</span><switch name='zhang' />
+                <span class='tip'>%</span><switch name='rangeType' />
             </view>
         </view>
     </view>

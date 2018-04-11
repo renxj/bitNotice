@@ -13,31 +13,34 @@ Page({
   //获取openID
   getOpenId: function() {
     wx.getStorage({
-      key: 'key',
+      key: 'openid',
       success: function (res) {
-        if(!res.data){
-          wx.login({
-            success: function (res) {
-              if (res.code) {
-                //发起网络请求
-                wx.request({
-                  url: 'https://api.flkem.com/getOpenid',
-                  data: {
-                    code: res.code
-                  },
-                  success: function (result) {
-                    wx.setStorage({
-                      key: "openid",
-                      data: result.data.data.openid
-                    })
-                  }
-                })
-              } else {
-                console.log('登录失败！' + res.errMsg)
-              }
+        console.log(res.data)
+      },
+      fail: function(err){
+        console.log(err)
+        wx.login({
+          success: function (res) {
+            if (res.code) {
+              //发起网络请求
+              wx.request({
+                url: 'https://api.flkem.com/getOpenid',
+                data: {
+                  code: res.code
+                },
+                success: function (result) {
+                  console.log(result.data.data.openid)
+                  wx.setStorage({
+                    key: "openid",
+                    data: result.data.data.openid
+                  })
+                }
+              })
+            } else {
+              console.log('登录失败！' + res.errMsg)
             }
-          });
-        }
+          }
+        });
       }
     })
     

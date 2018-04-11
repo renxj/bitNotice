@@ -24,23 +24,51 @@ Page({
       url: '../remind/remind'
     })
   },
-  onDelTap: function() {
+  onDelTap: function(event) {
+    let id = event.currentTarget.dataset.id
     wx.showModal({
       title: '确认删除该提醒？',
-      content: '',
       confirmText: "确定",
       cancelText: "取消",
       success: function (res) {
         console.log(res);
         if (res.confirm) {
           console.log('用户点击主确定')
-        } else {
-          console.log('用户点击取消')
+          wx.getStorage({
+            key: 'openid',
+            success: function (res) {
+              wx.request({
+                url: 'https://api.flkem.com/delete',
+                data: {
+                  'openid': res.data,
+                  'id': id
+                },
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded' // 默认值
+                },
+                method: "POST",
+                success: function (res) {
+                  if (res.data.code == 0) {
+                    wx.switchTab({
+                      url: '../mytips/mytips'
+                    })
+                  } else {
+                    wx.showToast({
+                      title: res.data.message,
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  }
+                }
+              })
+            }
+          })
+          
         }
       }
     });
   },
-  //测试临时数据
+
   tempData: function () {
     let self = this;
     wx.getStorage({
@@ -53,29 +81,15 @@ Page({
             openid: res.data
           },
           success: function (result) {
+            console.log(result)
             self.setData({
-              aryGoods: (result.data.data || []).map(item => {
-                return item.replace(/_/, '/').toUpperCase()
-              })
+              aryGoods: result.data.data
             });
           }
         })
       }
     })
     
-    var list = {
-      "code": 0,
-      "message": "成功",
-      "data": [
-        "qbt_usdt",
-        "gnx_usdt",
-        "qlc_usdt",
-        "eth_btc"
-      ]
-    };
-
-    
-
   }
 
 })
