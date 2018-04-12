@@ -8,10 +8,13 @@ Page({
     openid: '',
   },
   onLoad: function (options) {
-    this.tempData() 
+    // this.tempData() 
     wx.setNavigationBarTitle({
       title: '我的提醒'
     })
+  },
+  onShow: function () {
+    this.tempData() 
   },
   //点击加号,跳转到搜索
   onAddBtnTap: function (e) {
@@ -26,6 +29,7 @@ Page({
   },
   onDelTap: function(event) {
     let id = event.currentTarget.dataset.id
+    let self = this
     wx.showModal({
       title: '确认删除该提醒？',
       confirmText: "确定",
@@ -33,7 +37,6 @@ Page({
       success: function (res) {
         console.log(res);
         if (res.confirm) {
-          console.log('用户点击主确定')
           wx.getStorage({
             key: 'openid',
             success: function (res) {
@@ -49,9 +52,12 @@ Page({
                 method: "POST",
                 success: function (res) {
                   if (res.data.code == 0) {
-                    wx.switchTab({
-                      url: '../mytips/mytips'
+                    wx.showToast({
+                      title: '删除成功',
+                      icon: 'success',
+                      duration: 2000
                     })
+                    self.tempData() 
                   } else {
                     wx.showToast({
                       title: res.data.message,
@@ -74,7 +80,6 @@ Page({
     wx.getStorage({
       key: 'openid',
       success: function (res) {
-        console.log(res.data)
         wx.request({
           url: 'https://api.flkem.com/list',
           data: {

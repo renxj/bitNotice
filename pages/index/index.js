@@ -29,7 +29,6 @@ Page({
                   code: res.code
                 },
                 success: function (result) {
-                  console.log(result.data.data.openid)
                   wx.setStorage({
                     key: "openid",
                     data: result.data.data.openid
