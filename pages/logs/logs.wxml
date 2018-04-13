@@ -1,4 +1,5 @@
 <!--logs.wxml-->
+<view class="weui-cells__title">走势图意思一下~</view>
 <canvas canvas-id="stage" class="stage"
         bindtouchstart="touchstart"
         bindtouchmove="touchmove"
@@ -6,5 +7,4 @@
         bindtouchcancel="touchcancel"
         bindlongtap="longtap" >
 </canvas>
-
 <button bindtap="bindViewTap" class="weui-btn" type="primary" plain="true">设置提醒</button>

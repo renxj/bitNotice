@@ -6,7 +6,7 @@
        <view class="weui-cell"> 
         <view class="weui-cell__bd">{{item.symbol}}</view>
         <view class="weui-cell__ft">
-          <span bindtap="onEditTap" class='edit' url="../remind/remind?symbol={{item}}">编辑</span>
+          <span data-item="{{item}}" bindtap="onEditTap" class='edit'>编辑</span>
           <span data-id="{{item.id}}" bindtap="onDelTap" class='del'>删除</span>
         </view>
        </view> 

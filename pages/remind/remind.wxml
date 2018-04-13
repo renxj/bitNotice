@@ -6,13 +6,14 @@
     <view class="weui-cells weui-cells_after-title"> 
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-                <view class="weui-label">价格涨到</view>
+                <view class="weui-label">价格涨跌</view>
             </view>
             <view class="weui-cell__bd">
-                <input name="price" class="weui-input" placeholder="0.0000"/>
+                <input value='{{symbol_list.price || ""}}' name="price" class="weui-input" placeholder="0.0000"/>
             </view>
             <view class="weui-cell__ft">
-                <switch name='priceType' />
+                <switch wx:if='{{symbol_list.priceType == 1}}' checked name='priceType' />
+                <switch wx:if='{{symbol_list.priceType != 1}}' name='priceType' />
             </view>
         </view>
         <!-- <view class="weui-cell weui-cell_input">
@@ -28,16 +29,19 @@
         </view> -->
         <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-                <view class="weui-label">24小时涨幅</view>
+                <view class="weui-label">24小时涨跌</view>
             </view>
             <view class="weui-cell__bd">
-                <input name='range' class="weui-input" placeholder="0.0000"/>
+                <input value='{{symbol_list.range || ""}}' name='range' class="weui-input" placeholder="0.0000"/>
             </view>
             <view class="weui-cell__ft">
-                <span class='tip'>%</span><switch name='rangeType' />
+                <span class='tip'>%</span>
+                <switch wx:if='{{symbol_list.rangeType == 1}}' checked name='rangeType' />
+                <switch wx:if='{{symbol_list.rangeType != 1}}' name='rangeType' />
             </view>
         </view>
     </view>
+    <view class="weui-cells__title">注意：开关开启表示大于时提醒，开关关闭表示低于时提醒。</view>
     <view class="button-sp-area">
         <button formType="submit" class="weui-btn" type="primary" plain="true">保存</button>
     </view> 

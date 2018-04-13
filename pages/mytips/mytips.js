@@ -22,9 +22,10 @@ Page({
       url: '../index/index'
     })
   },
-  onEditTap: function(){
+  onEditTap: function (event){
+    let item = event.currentTarget.dataset.item
     wx.navigateTo({
-      url: '../remind/remind'
+      url: '../remind/remind?symbol_list=' + JSON.stringify(item)
     })
   },
   onDelTap: function(event) {
@@ -35,7 +36,6 @@ Page({
       confirmText: "确定",
       cancelText: "取消",
       success: function (res) {
-        console.log(res);
         if (res.confirm) {
           wx.getStorage({
             key: 'openid',
@@ -86,7 +86,6 @@ Page({
             openid: res.data
           },
           success: function (result) {
-            console.log(result)
             self.setData({
               aryGoods: result.data.data
             });

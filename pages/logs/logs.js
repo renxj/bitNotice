@@ -49,9 +49,6 @@ Page({
   //事件处理函数
   bindViewTap: function () {
     let url = '../remind/remind?symbol=' + this.data.symbol
-    // wx.redirectTo({
-    //   url: url
-    // })
     wx.navigateTo({
       url
     })
