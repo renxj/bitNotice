@@ -4,11 +4,9 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    listData: []
+    listData: [],
+    inputShowed: false,
+    inputVal: "",
   },
   //获取openID
   getOpenId: function() {
@@ -43,8 +41,15 @@ Page({
     })
     
   },
+  onShow: function (){
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+    this.tempData('');
+  },
   onLoad: function () {
-    this.tempData();
+    this.tempData('');
     this.getOpenId();
   },
   onShareAppMessage: function () {
@@ -56,11 +61,11 @@ Page({
     }
   },
   //列表数据
-  tempData: function () {
+  tempData: function (keyword) {
     let self = this
     wx.request({
       url: 'https://api.flkem.com/pairs', 
-      data: {},
+      data: { keyword },
       success: function (res) {
         self.setData({
           listData: (res.data.data || []).map(item => {
@@ -77,5 +82,28 @@ Page({
       url: '../search/search'
     })
   },
-
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+    this.tempData('')
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+    this.tempData('')
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+    this.tempData(e.detail.value);
+  }
 })
