@@ -25,9 +25,7 @@ Page({
   },
   formSubmit: function(e) {
     let self = this
-    console.log(this.data.symbol)
     let val = { 'symbol': this.data.symbol || this.data.symbol_list.symbol}
-    console.log(val)
     e.detail.value.priceType ? e.detail.value.priceType = 1 : e.detail.value.priceType = 0
     e.detail.value.rangeType ? e.detail.value.rangeType = 1 : e.detail.value.rangeType = 0
     let data = { ...e.detail.value, ...val, ...{"formId": 'aweesfdfc'} }
@@ -36,7 +34,7 @@ Page({
       success: function (res) {
         
         if (self.data.symbol_list){
-          data = { ...data, ...{ 'openid': res.data }, ...{ id: self.data.symbol_list.id } }
+          data = { ...data, ...{ 'openid': res.data }, ...{ id: self.data.symbol_list.id }, ...{ status: 0} }
           wx.request({
             url: 'https://api.flkem.com/update',
             data: data,

@@ -6,7 +6,9 @@
        <view class="weui-cell"> 
         <view class="weui-cell__bd">{{item.symbol}}</view>
         <view class="weui-cell__ft">
-          <span data-item="{{item}}" bindtap="onEditTap" class='edit'>编辑</span>
+          <span wx:if="{{item.status == 0}}" data-id="{{item.id}}" data-status="1" bindtap="oncloseTap" class='edit'>关闭</span>
+          <span wx:if="{{item.status == 1}}" data-id="{{item.id}}" data-status="0" bindtap="oncloseTap" class='edit'>开启</span>
+          <span data-item="{{item}}" bindtap="onEditTap" class='del'>编辑</span>
           <span data-id="{{item.id}}" bindtap="onDelTap" class='del'>删除</span>
         </view>
        </view> 

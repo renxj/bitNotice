@@ -18,7 +18,6 @@ Page({
         // console.log(res.data)
       },
       fail: function(err){
-        console.log(err)
         wx.login({
           success: function (res) {
             if (res.code) {

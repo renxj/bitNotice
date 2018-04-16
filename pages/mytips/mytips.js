@@ -22,6 +22,41 @@ Page({
       url: '../index/index'
     })
   },
+  oncloseTap: function (event) {
+    let id = event.currentTarget.dataset.id
+    let status = event.currentTarget.dataset.status
+    let self = this
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        wx.request({
+          url: 'https://api.flkem.com/update',
+          data: {
+            'openid': res.data,
+            'id': id,
+            'status': status
+          },
+          method: "POST",
+          success: function (res) {
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: status==1 ? '关闭成功' : '开启成功',
+                icon: 'success',
+                duration: 2000
+              })
+              self.tempData()
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }
+        })
+      }
+    })
+  },
   onEditTap: function (event){
     let item = event.currentTarget.dataset.item
     wx.navigateTo({
