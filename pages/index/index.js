@@ -51,7 +51,7 @@ Page({
     return {
       title: '看我看我就对了',
       desc: '最具人气的小程序',
-      imageUrl: 'https://static.suiyueyule.com/headerimg.png',
+      imageUrl: '../../images/timg.jpeg',
       path: 'pages/index/index'
     }
   },
