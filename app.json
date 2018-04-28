@@ -3,8 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/remind/remind",
-    "pages/mytips/mytips",
-    "pages/search/search"
+    "pages/mytips/mytips"
   ],
   "window":{
     "navigationBarBackgroundColor": "#f8f8f8",

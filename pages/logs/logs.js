@@ -3,8 +3,8 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    logs: [],
-    symbol: '',
+    'detail': {},
+    'symbol': '',
   },
   onLoad: function (options) {
     this.line('stage', {
@@ -13,8 +13,10 @@ Page({
     })
     let title = options.symbol + '详情'
     this.setData({
-      symbol: options.symbol
+      'symbol': options.symbol
     })
+    let keys = options.symbol.toLocaleLowerCase().replace('/', '_')
+    this.tempData(keys)
     wx.setNavigationBarTitle({
       title: title
     })
@@ -45,6 +47,32 @@ Page({
     ctx.setStrokeStyle('red')
     ctx.stroke()
     ctx.draw()
+  },
+  //详情数据
+  tempData: function (symbol) {
+    let self = this
+    wx.request({
+      url: 'https://api.flkem.com/ticker/' + symbol,
+      data: { },
+      success: function (res) {
+        if (res.data.code == 0 && res.data.data.result){
+          self.setData({
+            'detail': res.data.data
+          });
+          
+        }else{
+          wx.showModal({
+            content: res.data.data.message,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          });
+        } 
+      }
+    })
+
   },
   //事件处理函数
   bindViewTap: function () {

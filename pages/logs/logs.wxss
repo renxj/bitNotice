@@ -4,6 +4,7 @@
     margin: 20px auto;
     background-color: #fff;
 }
-button{
+button.weui-btn {
+  margin-top: 80rpx;
   width:50%;
 }

@@ -1,10 +1,36 @@
 <!--logs.wxml-->
-<view class="weui-cells__title">走势图意思一下~</view>
-<canvas canvas-id="stage" class="stage"
-        bindtouchstart="touchstart"
-        bindtouchmove="touchmove"
-        bindtouchend="touchend"
-        bindtouchcancel="touchcancel"
-        bindlongtap="longtap" >
-</canvas>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">交易量</view>
+        <view class="weui-cell__ft">${{detail.baseVolume}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">24小时最高价</view>
+        <view class="weui-cell__ft">${{detail.high24hr}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">24小时最低价</view>
+        <view class="weui-cell__ft">${{detail.low24hr}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">买方最高价</view>
+        <view class="weui-cell__ft">${{detail.highestBid}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">卖方最低价</view>
+        <view class="weui-cell__ft">${{detail.lowestAsk}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">最新成交价</view>
+        <view class="weui-cell__ft">${{detail.last}}</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">涨跌百分比</view>
+        <view class="weui-cell__ft">{{detail.percentChange}}%</view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__bd">兑换货币交易量</view>
+        <view class="weui-cell__ft">${{detail.quoteVolume}}</view>
+    </view>
+</view>
 <button bindtap="bindViewTap" class="weui-btn" type="primary" plain="true">设置提醒</button>
